@@ -1,8 +1,13 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-const links = [
+const mainLinks = [
   { href: "/", label: "Ringkasan" },
   { href: "/peta", label: "Peta" },
+  { href: "/prediksi", label: "Prediksi" },
+];
+
+const advancedLinks = [
   { href: "/analisis", label: "Analisis" },
   { href: "/perbandingan", label: "Perbandingan" },
   { href: "/efektivitas", label: "Efektivitas" },
@@ -31,6 +36,7 @@ function CloseIcon() {
 }
 
 export default function Sidebar({ isOpen, onToggle, onNavigate }: SidebarProps) {
+  const router = useRouter();
   return (
     <aside className={`sidebar ${isOpen ? "open" : "collapsed"}`}>
       <div className="sidebar-header">
@@ -46,8 +52,26 @@ export default function Sidebar({ isOpen, onToggle, onNavigate }: SidebarProps) 
         </button>
       </div>
       <nav className="sidebar-nav">
-        {links.map((link) => (
-          <Link key={link.href} href={link.href} onClick={onNavigate}>
+        {mainLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={onNavigate}
+            className={router.pathname === link.href ? "active" : ""}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+      <div className="sidebar-section-title">Lanjutan</div>
+      <nav className="sidebar-nav advanced">
+        {advancedLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={onNavigate}
+            className={router.pathname === link.href ? "active" : ""}
+          >
             {link.label}
           </Link>
         ))}

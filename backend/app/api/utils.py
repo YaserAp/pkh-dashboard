@@ -7,6 +7,8 @@ from app.data.transform import ensure_processed_tables
 
 VALID_METRICS = {"kemiskinan", "pkh", "kemiskinan_abs"}
 VALID_TREND_METRICS = {"kemiskinan", "pkh"}
+VALID_PREDICT_METRICS = {"kemiskinan", "pkh", "kemiskinan_abs", "all"}
+VALID_PREDICT_METHODS = {"auto", "holt", "arima", "linear"}
 
 
 def resolve_year(year: int | None) -> int:

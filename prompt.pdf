@@ -1,0 +1,154 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Length 3780 >>
+stream
+BT
+/F1 10 Tf
+72 760 Td
+(PROMPT PEMBARUAN LAPORAN \(PSD.pdf ? versi terbaru\)) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Tanggal: 2026-01-18 22:16) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Peran Anda:) Tj
+0 -14 Td
+(- Anda adalah asisten penulis akademik. Update laporan PSD.pdf agar sesuai dengan perubahan sistem terbaru.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Konteks ringkas laporan lama \(PSD.pdf\):) Tj
+0 -14 Td
+(- Fokus: efektivitas PKH terhadap kemiskinan di Jawa Barat \(2017?2024\).) Tj
+0 -14 Td
+(- Metode: EDA, korelasi Pearson, regresi linier sederhana.) Tj
+0 -14 Td
+(- Batasan: sistem hanya analisis & visualisasi, bukan prediksi.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Perubahan sistem terbaru yang WAJIB dimasukkan:) Tj
+0 -14 Td
+(1\) Prediksi 5 tahun ke depan \(2025?2029\) untuk:) Tj
+0 -14 Td
+(   - PKH \(jumlah penerima manfaat\)) Tj
+0 -14 Td
+(   - Kemiskinan absolut \(ribu orang miskin\)) Tj
+0 -14 Td
+(   - Kemiskinan persen \(%\)) Tj
+0 -14 Td
+(   Metode utama: Holt-Winters \(trend additive\).) Tj
+0 -14 Td
+(2\) Perbandingan 3 metode: Holt-Winters, ARIMA\(1,1,1\), Linear Trend.) Tj
+0 -14 Td
+(   Evaluasi akurasi dengan RMSE/MAE/MAPE + skor 0?100 \(100 - MAPE\).) Tj
+0 -14 Td
+(3\) Dashboard baru: halaman Prediksi + tabel Prediksi 5 tahun di Ringkasan) Tj
+0 -14 Td
+(   + tabel ?Aktual vs Prediksi \(tahun berikutnya\)? di Ringkasan.) Tj
+0 -14 Td
+(4\) UI/UX: menu Utama \(Ringkasan, Peta, Prediksi\) & Lanjutan \(Analisis, Perbandingan, Efektivitas\).) Tj
+0 -14 Td
+(5\) Pipeline data di Colab: ingest ? cleaning ? normalisasi ? filter Jabar ? processed tables ? prediksi ? visualisasi.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Tugas Anda:) Tj
+0 -14 Td
+(- Revisi laporan agar selaras dengan sistem terbaru.) Tj
+0 -14 Td
+(- Hindari kontradiksi: hapus/ubah kalimat lama yang menyebut ?bukan untuk prediksi?.) Tj
+0 -14 Td
+(- Pastikan narasi tetap akademik, sistematis, dan konsisten.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Bagian yang perlu diupdate:) Tj
+0 -14 Td
+(A. Bab 1 \(Pendahuluan\)) Tj
+0 -14 Td
+(   - Latar belakang: tambahkan kebutuhan proyeksi/prediksi untuk kebijakan berbasis data.) Tj
+0 -14 Td
+(   - Rumusan masalah: tambah pertanyaan tentang prediksi 5 tahun dan perbandingan metode.) Tj
+0 -14 Td
+(   - Tujuan: tambahkan tujuan membangun model prediksi dan evaluasi metode.) Tj
+0 -14 Td
+(   - Batasan masalah: update bahwa sistem mencakup prediksi; jelaskan horizon 5 tahun dan metode.) Tj
+0 -14 Td
+(B. Bab 3 \(Metodologi\)) Tj
+0 -14 Td
+(   - Tambahkan tahap forecasting \(Holt/ARIMA/Linear\).) Tj
+0 -14 Td
+(   - Tambahkan evaluasi akurasi \(RMSE/MAE/MAPE, skor 0?100\).) Tj
+0 -14 Td
+(   - Jelaskan pipeline data \(ETL/processing\) dan prediksi di Colab.) Tj
+0 -14 Td
+(C. Perancangan Sistem/Dashboard) Tj
+0 -14 Td
+(   - Jelaskan fitur halaman Prediksi, tabel ringkasan prediksi, dan perbandingan aktual vs prediksi.) Tj
+0 -14 Td
+(   - Jelaskan menu Utama vs Lanjutan untuk user awam vs lanjutan.) Tj
+0 -14 Td
+(D. Hasil/Analisis \(bila ada bab hasil\):) Tj
+0 -14 Td
+(   - Sisipkan ringkasan hasil prediksi agregat dan cara interpretasi.) Tj
+0 -14 Td
+(   - Jelaskan makna skor akurasi sederhana untuk pengguna awam.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Format keluaran:) Tj
+0 -14 Td
+(- Update laporan PSD.pdf menjadi versi baru \(judul dan isi boleh diperbarui\).) Tj
+0 -14 Td
+(- Gunakan gaya bahasa ilmiah, konsisten dengan laporan lama.) Tj
+0 -14 Td
+(- Jika ada tabel/gambar prediksi, sebutkan sumber data dan metode.) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Catatan data:) Tj
+0 -14 Td
+(- Data historis: 2017?2024.) Tj
+0 -14 Td
+(- Prediksi: 5 tahun ke depan \(2025?2029\).) Tj
+0 -14 Td
+(- Wilayah: Provinsi Jawa Barat \(kab/kota\).) Tj
+0 -14 Td
+() Tj
+0 -14 Td
+(Output yang diminta:) Tj
+0 -14 Td
+(- Dokumen laporan diperbarui \(format PDF atau DOCX sesuai kebutuhan\).) Tj
+0 -14 Td
+(- Pastikan seluruh perubahan di atas tercermin jelas.) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000309 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+4141
+%%EOF

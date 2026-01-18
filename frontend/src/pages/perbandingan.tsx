@@ -38,6 +38,7 @@ export default function Perbandingan() {
       <PageHeader
         title="Perbandingan"
         subtitle="Bandingkan perubahan antar tahun serta perbandingan PKH dan kemiskinan di kab/kota."
+        tag="Lanjutan"
       />
       <FiltersBar
         year={year}

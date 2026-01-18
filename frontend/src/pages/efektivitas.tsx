@@ -30,6 +30,7 @@ export default function Efektivitas() {
       <PageHeader
         title="Efektivitas"
         subtitle="Rasio perubahan kemiskinan terhadap perubahan penerima PKH per tahun."
+        tag="Lanjutan"
       />
       <FiltersBar
         year={year}

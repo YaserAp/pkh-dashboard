@@ -71,3 +71,23 @@ class CompareYearsResponse(BaseResponse):
 
 class UploadResponse(BaseResponse):
     filename: str
+
+
+class PredictionResponse(BaseResponse):
+    metric: str
+    horizon: int
+    start_year: int
+    end_year: int
+    method: Optional[str] = None
+    export_path: Optional[str] = None
+    data: Optional[Any] = None
+
+
+class PredictionComparisonResponse(BaseResponse):
+    metric: str
+    test_years: int
+    start_year: int
+    end_year: int
+    best_method: Optional[str] = None
+    export_paths: Optional[dict[str, str]] = None
+    data: Optional[Any] = None

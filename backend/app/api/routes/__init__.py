@@ -8,6 +8,7 @@ from app.api.routes.effectiveness import router as effectiveness_router
 from app.api.routes.kabkota import router as kabkota_router
 from app.api.routes.insights import router as insights_router
 from app.api.routes.map import router as map_router
+from app.api.routes.predict import router as predict_router
 from app.api.routes.regression import router as regression_router
 from app.api.routes.report import router as report_router
 from app.api.routes.scatter import router as scatter_router
@@ -29,3 +30,4 @@ api_router.include_router(regression_router, prefix="/regression", tags=["regres
 api_router.include_router(effectiveness_router, prefix="/effectiveness", tags=["effectiveness"])
 api_router.include_router(report_router, prefix="/report", tags=["report"])
 api_router.include_router(admin_upload_router, prefix="/admin", tags=["admin"])
+api_router.include_router(predict_router, prefix="/predict", tags=["predict"])

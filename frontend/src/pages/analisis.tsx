@@ -44,6 +44,7 @@ export default function Analisis() {
       <PageHeader
         title="Analisis Statistik"
         subtitle="Scatter, korelasi, regresi, dan insight otomatis untuk hubungan PKH dan kemiskinan."
+        tag="Lanjutan"
       />
       <FiltersBar
         year={year}
