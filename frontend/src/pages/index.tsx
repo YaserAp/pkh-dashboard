@@ -314,7 +314,9 @@ export default function Home() {
           ) : (
             <p>Data perbandingan belum tersedia.</p>
           )}
-          <div className="note">Prediksi menggunakan metode auto (holt → linear → naive) dari data historis.</div>
+          <div className="note">
+            Prediksi menggunakan metode otomatis dari data historis. Detail metode tersedia di halaman Prediksi.
+          </div>
         </div>
       </section>
 

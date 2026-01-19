@@ -62,7 +62,7 @@ type CompareResponse = {
 };
 
 const METHOD_OPTIONS = [
-  { value: "auto", label: "Auto (Holt > Linear > Naive)" },
+  { value: "auto", label: "Otomatis (direkomendasikan)" },
   { value: "holt", label: "Holt-Winters" },
   { value: "arima", label: "ARIMA(1,1,1)" },
   { value: "linear", label: "Linear Trend" },
@@ -85,6 +85,11 @@ function getMetricUnit(metric: string) {
   return "penerima";
 }
 
+function formatMetricValue(metric: string, value: number) {
+  if (metric === "kemiskinan") return formatFloat(value, 2);
+  return formatNumber(Math.round(value));
+}
+
 export default function Prediksi() {
   const [metric, setMetric] = useState(METRICS[0].value);
   const [method, setMethod] = useState("auto");
@@ -102,6 +107,7 @@ export default function Prediksi() {
   const [exportingPrediction, setExportingPrediction] = useState(false);
   const [exportingCompare, setExportingCompare] = useState(false);
   const unitLabel = getMetricUnit(metric);
+  const metricLabel = useMemo(() => METRICS.find((item) => item.value === metric)?.label ?? "-", [metric]);
 
   useEffect(() => {
     apiGet(`/api/kabkota?year=2024&metric=kemiskinan`).then((res) => {
@@ -201,6 +207,36 @@ export default function Prediksi() {
       .join(" ");
   }, [perYear]);
 
+  const chartStats = useMemo(() => {
+    if (perYear.length < 2) return null;
+    const min = Math.min(...perYear.map((p) => p.value));
+    const max = Math.max(...perYear.map((p) => p.value));
+    return { min, max };
+  }, [perYear]);
+
+  const trendSummary = useMemo(() => {
+    if (perYear.length < 2) return null;
+    const first = perYear[0];
+    const last = perYear[perYear.length - 1];
+    const delta = last.value - first.value;
+    const direction = delta > 0 ? "naik" : delta < 0 ? "turun" : "stabil";
+    const change = Math.abs(delta);
+    const formattedChange = formatMetricValue(metric, change);
+    return {
+      startYear: first.tahun,
+      endYear: last.tahun,
+      direction,
+      change: formattedChange,
+      startValue: formatMetricValue(metric, first.value),
+      endValue: formatMetricValue(metric, last.value),
+    };
+  }, [perYear, metric]);
+
+  const methodLabel = useMemo(
+    () => METHOD_OPTIONS.find((item) => item.value === prediction?.method)?.label ?? prediction?.method ?? "-",
+    [prediction?.method]
+  );
+
   return (
     <Layout>
       <PageHeader
@@ -216,6 +252,9 @@ export default function Prediksi() {
               <span className="chip">Dataset 2017-2024</span>
               <span className="chip">Forecast {horizon} tahun</span>
             </div>
+          </div>
+          <div className="note">
+            Pilih indikator dan wilayah. Metode otomatis direkomendasikan untuk pengguna umum.
           </div>
           <div className="controls">
             <select value={metric} onChange={(e) => setMetric(e.target.value)}>
@@ -266,12 +305,62 @@ export default function Prediksi() {
             <p>Memuat prediksi...</p>
           ) : predictionRows.length > 0 ? (
             <>
-              <svg width="100%" height="180" viewBox="0 0 600 180">
+              {trendSummary && (
+                <div className="chart-summary">
+                  Rata-rata {metricLabel} diprediksi {trendSummary.direction} {trendSummary.change} {unitLabel}
+                  dari {trendSummary.startYear} ke {trendSummary.endYear}.
+                </div>
+              )}
+              <svg className="chart-svg" width="100%" height="200" viewBox="0 0 600 200">
+                <line x1="20" y1="30" x2="20" y2="170" stroke="rgba(29, 26, 22, 0.12)" strokeWidth="2" />
+                <line x1="20" y1="170" x2="580" y2="170" stroke="rgba(29, 26, 22, 0.12)" strokeWidth="2" />
                 <polyline fill="none" stroke="#2b6a5b" strokeWidth="3" points={chartPoints} />
+                {perYear[0] && (
+                  <circle
+                    cx="20"
+                    cy={
+                      140 -
+                      ((perYear[0].value - (chartStats?.min ?? 0)) /
+                        ((chartStats?.max ?? 1) - (chartStats?.min ?? 0) || 1)) *
+                        100
+                    }
+                    r="5"
+                    fill="#2b6a5b"
+                  />
+                )}
+                {perYear[perYear.length - 1] && (
+                  <circle
+                    cx="580"
+                    cy={
+                      140 -
+                      ((perYear[perYear.length - 1].value - (chartStats?.min ?? 0)) /
+                        ((chartStats?.max ?? 1) - (chartStats?.min ?? 0) || 1)) *
+                        100
+                    }
+                    r="5"
+                    fill="#2b6a5b"
+                  />
+                )}
+                {trendSummary && (
+                  <>
+                    <text x="20" y="188" fontSize="12" fill="#6f665c">
+                      {trendSummary.startYear}
+                    </text>
+                    <text x="540" y="188" fontSize="12" fill="#6f665c">
+                      {trendSummary.endYear}
+                    </text>
+                    <text x="20" y="20" fontSize="12" fill="#6f665c">
+                      {chartStats ? formatMetricValue(metric, chartStats.max) : "-"} {unitLabel}
+                    </text>
+                    <text x="20" y="160" fontSize="12" fill="#6f665c">
+                      {chartStats ? formatMetricValue(metric, chartStats.min) : "-"} {unitLabel}
+                    </text>
+                  </>
+                )}
               </svg>
               <div className="legend">
-                <span>Rata-rata nilai prediksi</span>
-                <span>Metode: {prediction?.method || "-"}</span>
+                <span>Rata-rata nilai prediksi per tahun</span>
+                <span>Metode: {methodLabel}</span>
               </div>
             </>
           ) : (
@@ -291,6 +380,7 @@ export default function Prediksi() {
           <div className="section-title">
             <h3>Top 8 Kab/Kota (Tahun Terakhir)</h3>
           </div>
+          <div className="note">Urutan berdasarkan nilai tahun terakhir. Satuan: {unitLabel}.</div>
           {topLatest.length > 0 ? (
             <div className="bar-list">
               {topLatest.map((row) => (
@@ -299,7 +389,7 @@ export default function Prediksi() {
                   <div className="bar-track">
                     <div className="bar-fill pos" style={{ width: `${(row.value / topLatest[0].value) * 100}%` }} />
                   </div>
-                  <span>{formatFloat(row.value, 2)}</span>
+                  <span className="bar-value">{formatMetricValue(metric, row.value)}</span>
                 </div>
               ))}
             </div>
